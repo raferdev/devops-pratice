@@ -25,6 +25,9 @@ services:
     build: ./front-end
     volumes:
       - build_react:/var/www/html
+    depends_on:
+      - drivenops_db
+      - drivenops_back-end
   
   drivenops_nginx:
     container_name: drivenops_ngnix
