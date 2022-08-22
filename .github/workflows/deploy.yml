@@ -4,8 +4,8 @@ on:
     - main
 name: Build and Deploy
 jobs:
-  build:
-    runs-onds: self-hosted
+  build: 
+    runs-on: self-hosted
     timeout-minutes: 20
     steps:
       - name: Checkout
