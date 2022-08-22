@@ -1,0 +1,43 @@
+services:
+  drivenops_db:
+    image: postgres
+    container_name: drivenops_db
+    restart: always
+    ports:
+      - 4457:5432
+    env_file:
+      - back-end/.env
+    volumes:
+      - drivenops_db:/var/lib/postgresql/data
+  
+  drivenops_back-end:
+    container_name: drivenops_back-end
+    build: ./back-end
+    ports:
+      - 5000:5000
+    depends_on:
+      - drivenops_db
+    env_file:
+      - back-end/.env
+  
+  drivenops_front-end:
+    container_name: drivenops_front-end
+    build: ./front-end
+    volumes:
+      - build_react:/var/www/html
+  
+  drivenops_nginx:
+    container_name: drivenops_ngnix
+    build: ./nginx
+    ports:
+      - 8080:80
+    volumes:
+    - build_react:/var/www/html
+    depends_on:
+      - drivenops_db
+      - drivenops_back-end
+      - drivenops_front-end
+
+volumes:
+  drivenops_db:
+  build_react:
