@@ -28,8 +28,9 @@ jobs:
           directory: front-end/
           file_name: .env
           fail_on_empty: true
-      
+      - name: Clean
+        run: docker-compose down && docker system prune --all --force
       - name: Build
         run: docker-compose build
       - name: Run
-        run: docker-compose down && docker system prune --all --force && docker-compose up -d
+        run: docker-compose up -d
