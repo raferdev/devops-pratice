@@ -9,6 +9,7 @@ function App() {
     try {
       const response = await axios.get(`${API_URL}/students/random`);
       const student = response.data;
+      console.log(student)
       if(!student){
         alert("Putz! Não há estudantes cadastrados para o sorteio!");
       } else {
